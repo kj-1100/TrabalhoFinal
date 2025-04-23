@@ -22,9 +22,12 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
     const result = await loginUser(email, password);
     showMessage('login-message', result.message, result.success);
 
+
+
     if (result.success) {
-        window.location.href = 'dashboard.html';
+        safeRedirect('dashboard.html');
     }
+    passwordInput.value = "";
 });
 
 // Formulário de registro
@@ -38,6 +41,7 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
     const passwordCheck = validatePassword(password);
     if (!passwordCheck.valid || recaptchaToken.trim() === "") {
         showMessage('register-message', passwordCheck.message, false);
+        passwordInput.value = "";
         return;
     }
     if (!recaptchaToken) {
@@ -46,7 +50,10 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
     }
 
     const result = await registerUser(email, password);
+
     showMessage('register-message', result.message, result.success);
+
+    passwordInput.value = "";
 });
 
 
@@ -80,6 +87,16 @@ function validatePassword(password) {
     return { valid: true, };
 }
 
+// Só permite caminhos internos relativos (sem "http://", "//" ou backslashes) para  evitar redirecionamento malicioso
+ function safeRedirect(path) {
+   
+    const isSafe = /^[a-zA-Z0-9/_-]+\.html$/.test(path);
+    if (isSafe) {
+        window.location.href = path;
+    } else {
+        console.warn('Tentativa de redirecionamento inseguro bloqueada:', path);
+    }
+}
 
 // Verifica autenticação ao carregar
 checkAuth().then(user => {
