@@ -85,7 +85,21 @@ body {
 }
 
 
+.auth-links {
+    color: var(--color-primary);
+}
 
+.auth-links a {
+    color: inherit;
+    text-decoration: none;
+    margin: 0 5px;
+    font-weight: 500;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+    color: var(--color-primary-hover);
+}
 
 button {
     padding: 12px;

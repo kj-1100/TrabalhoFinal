@@ -10,7 +10,7 @@ const firebaseConfig = {
 };
 
 // Inicializa o Firebase
-const app = firebase.initializeApp(firebaseConfig);
+const app = firebase.initializeApp(window._FIREBASE_CONFIG);
 const auth = firebase.auth(app);
 
 // Função para verificar autenticação
