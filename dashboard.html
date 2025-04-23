@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Protegido</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <header>
+            <h1>Bem-vindo ao Dashboard</h1>
+            <button id="logout-btn">Sair</button>
+        </header>
+
+        <div class="user-info">
+            <h2>Informações da Conta</h2>
+            <p><strong>E-mail:</strong> <span id="user-email">carregando...</span></p>
+            <p><strong>Status:</strong> <span id="user-status">verificando...</span></p>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+
+    <!-- Configuração -->
+    <script src="js/firebase-config.js"></script>
+
+    <!-- Lógica do Dashboard -->
+    <script src="js/dashboard.js"></script>
+
+    <!-- Tema -->
+    <script src="js/tema.js"></script>
+</body>
+
+</html>
