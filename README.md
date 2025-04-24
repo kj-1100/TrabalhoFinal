@@ -9,30 +9,18 @@ Para que ele funcione corretamente, é necessário rodar o projeto em um servido
 ✅ Opção 1 — Rodar com Node.js (http-server)
 Se você tem o Node.js instalado, rode o servidor local com:
 
-bash
-Copiar
-Editar
 npm install -g http-server
-cd frontend
+cd \pasta\TrabalhoFinal
 http-server
 Depois, abra o navegador em:
-
-arduino
-Copiar
-Editar
 http://localhost:8080
+
+
 ✅ Opção 2 — Rodar com Python (sem necessidade de Node)
 Se você tem o Python instalado (versão 3+), use:
 
-bash
-Copiar
-Editar
-cd frontend
+cd \pasta\TrabalhoFinal
 python -m http.server 8080
 Depois, acesse no navegador:
-
-arduino
-Copiar
-Editar
 http://localhost:8080
 
