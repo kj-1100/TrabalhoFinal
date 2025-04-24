@@ -22,19 +22,27 @@
     ">
 
     <link rel="stylesheet" href="css/dashboard.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 
 <body>
+    <button id="theme-toggle" aria-label="Alternar tema" class="theme-button">
+        <span id="theme-icon" class="material-symbols-outlined">dark_mode</span>
+    </button>
+
     <div class="dashboard-container">
         <header>
             <h1>Bem-vindo ao Dashboard</h1>
-            <button id="logout-btn">Sair</button>
         </header>
+
+        <hr> <!-- Linha -->
 
         <div class="user-info">
             <h2>Informações da Conta</h2>
             <p><strong>E-mail:</strong> <span id="user-email">carregando...</span></p>
             <p><strong>Status:</strong> <span id="user-status">verificando...</span></p>
+            <button id="logout-btn">Sair</button>
         </div>
     </div>
 

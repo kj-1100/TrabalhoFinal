@@ -1,5 +1,3 @@
-
-
 // Alternar entre login e registro
 document.getElementById('show-register').addEventListener('click', (e) => {
     e.preventDefault();
@@ -16,17 +14,20 @@ document.getElementById('show-login').addEventListener('click', (e) => {
 // Formulário de login
 document.getElementById('login-form').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const email = document.getElementById('login-email').value;
-    const password = document.getElementById('login-password').value;
+
+    const emailInput = document.getElementById('login-email');
+    const passwordInput = document.getElementById('login-password');
+
+    const email = emailInput.value;
+    const password = passwordInput.value;
 
     const result = await loginUser(email, password);
     showMessage('login-message', result.message, result.success);
 
-
-
     if (result.success) {
         safeRedirect('dashboard.html');
     }
+
     passwordInput.value = "";
 });
 
@@ -34,28 +35,29 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
 document.getElementById('register-form').addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const email = document.getElementById('register-email').value;
-    const password = document.getElementById('register-password').value;
+    const emailInput = document.getElementById('register-email');
+    const passwordInput = document.getElementById('register-password');
+    const email = emailInput.value;
+    const password = passwordInput.value;
     const recaptchaToken = grecaptcha.getResponse();
 
     const passwordCheck = validatePassword(password);
-    if (!passwordCheck.valid || recaptchaToken.trim() === "") {
+    if (!passwordCheck.valid) {
         showMessage('register-message', passwordCheck.message, false);
         passwordInput.value = "";
         return;
     }
-    if (!recaptchaToken) {
+
+    if (!recaptchaToken || recaptchaToken.trim() === "") {
         showMessage('register-message', 'Por favor, confirme que você não é um robô.', false);
         return;
     }
 
     const result = await registerUser(email, password);
-
     showMessage('register-message', result.message, result.success);
 
     passwordInput.value = "";
 });
-
 
 // Função auxiliar para mostrar mensagens
 function showMessage(elementId, message, isSuccess) {
@@ -65,10 +67,9 @@ function showMessage(elementId, message, isSuccess) {
         element.style.color = isSuccess ? 'green' : 'red';
     }
 }
-// Função auxiliar sobre os requisitos de senha 
+
+// Validação de senha forte
 function validatePassword(password) {
-
-
     if (password.length < 8) {
         return { valid: false, message: "A senha deve ter no mínimo 8 caracteres" };
     }
@@ -84,12 +85,11 @@ function validatePassword(password) {
     if (!/[\W_]/.test(password)) {
         return { valid: false, message: "A senha deve conter pelo menos um caractere especial (!@#$...)" };
     }
-    return { valid: true, };
+    return { valid: true };
 }
 
-// Só permite caminhos internos relativos (sem "http://", "//" ou backslashes) para  evitar redirecionamento malicioso
- function safeRedirect(path) {
-   
+// Redirecionamento seguro
+function safeRedirect(path) {
     const isSafe = /^[a-zA-Z0-9/_-]+\.html$/.test(path);
     if (isSafe) {
         window.location.href = path;
@@ -98,7 +98,7 @@ function validatePassword(password) {
     }
 }
 
-// Verifica autenticação ao carregar
+// Verifica autenticação ao carregar a página
 checkAuth().then(user => {
     if (user && user.emailVerified) {
         window.location.href = 'dashboard.html';
